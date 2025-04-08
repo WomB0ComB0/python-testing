@@ -1,0 +1,3 @@
+linkedin-scraper
+python-dotenv
+selenium
