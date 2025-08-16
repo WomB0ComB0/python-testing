@@ -1,3 +1,9 @@
 linkedin-scraper
 python-dotenv
 selenium
+tenacity
+tiktoken
+aiofiles
+playwright
+pydantic
+beautifulsoup4

@@ -1,0 +1,72 @@
+{
+  "timestamp": 1755303644.653433,
+  "total_analyzed": 3,
+  "results": [
+    {
+      "url": "https://example.com",
+      "content_type": "ContentType.UNKNOWN",
+      "metadata": {
+        "title": "Example Domain",
+        "word_count": 30,
+        "reading_time": 1
+      },
+      "summary": "Example Domain Example Domain This domain is for use in illustrative examples in documents. You may use this domain in literature without prior coordination or asking for permission.",
+      "key_points": [
+        "Example Domain Example Domain This domain is for use in illustrative examples in documents",
+        "You may use this domain in literature without prior coordination or asking for permission"
+      ],
+      "sentiment": "neutral",
+      "readability_score": 0.0,
+      "topics": [
+        "Example Domain Example Domain This",
+        "More"
+      ],
+      "processing_time": 0.5063371658325195
+    },
+    {
+      "url": "https://httpbin.org/html",
+      "content_type": "ContentType.UNKNOWN",
+      "metadata": {
+        "word_count": 624,
+        "reading_time": 3
+      },
+      "summary": "Herman Melville - Moby-Dick Availing himself of the mild, summer-cool weather that now reigned in these latitudes, and in preparation for the peculiarly active pursuits shortly to be anticipated, Perth, the begrimed, blistered old blacksmith, had not removed his portable forge to the hold again, after concluding his contributory work for Ahab's leg, but still retained it on deck, fast lashed to ringbolts by the foremast; being now almost incessantly invoked by the headsmen, and harpooneers, and bowsmen to do some little job for them; altering, or repairing, or new shaping their various weapons and boat furniture. Often he would be surrounded by an eager circle, all waiting to be served; holding boat-spades, pike-heads, harpoons, and lances, and jealously watching his every sooty movement, as he toiled. Nevertheless, this old man's was a patient hammer wielded by a patient arm.",
+      "key_points": [
+        "Often he would be surrounded by an eager circle, all waiting to be served; holding boat-spades, pike-heads, harpoons, and lances, and jealously watching his every sooty movement, as he toiled",
+        "Nevertheless, this old man's was a patient hammer wielded by a patient arm",
+        "No murmur, no impatience, no petulance did come from him",
+        "Silent, slow, and solemn; bowing over still further his chronically broken back, he toiled away, as if toil were life itself, and the heavy beating of his hammer the heavy beating of his heart",
+        "A peculiar walk in this old man, a certain slight but painful appearing yawing in his gait, had at an early period of the voyage excited the curiosity of the mariners"
+      ],
+      "sentiment": "negative",
+      "readability_score": 27.04472408026757,
+      "topics": [
+        "Dick Availing",
+        "Ahab",
+        "Silent",
+        "Often",
+        "Moby",
+        "Perth",
+        "Nevertheless",
+        "Most",
+        "Herman Melville",
+        "Belated"
+      ],
+      "processing_time": 0.5078246593475342
+    },
+    {
+      "url": "https://jsonplaceholder.typicode.com/posts/1",
+      "content_type": "ContentType.BLOG_POST",
+      "metadata": {
+        "word_count": 38,
+        "reading_time": 1
+      },
+      "summary": "{ \"userId\": 1, \"id\": 1, \"title\": \"sunt aut facere repellat provident occaecati excepturi optio reprehenderit\", \"body\": \"quia et suscipit\\nsuscipit recusandae consequuntur expedita et cum\\nreprehenderit molestiae ut ut quas totam\\nnostrum rerum est autem sunt rem eveniet architecto\" }.",
+      "key_points": [],
+      "sentiment": "neutral",
+      "readability_score": 0.0,
+      "topics": [],
+      "processing_time": 0.5516037940979004
+    }
+  ]
+}

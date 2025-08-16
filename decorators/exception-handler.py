@@ -77,7 +77,11 @@ def handle_exceptions(
     valid_log_levels = {"debug", "info", "warning", "error", "critical"}
     if log_level.lower() not in valid_log_levels:
         raise ValueError(
-            f"Invalid log_level '{log_level}'. Must be one of: {valid_log_levels}"
+            format(
+                "Invalid log_level '{log_level}'. Must be one of: {valid_log_levels}",
+                log_level,
+                valid_log_levels,
+            )
         )
 
     # Merge all exception handlers
@@ -140,14 +144,21 @@ def handle_exceptions(
                             raise e from fallback_error
                         else:
                             raise Exception(
-                                f"Fallback handler failed: {fallback_error}"
+                                format(
+                                    "Fallback handler failed: {fallback_error}",
+                                    fallback_error,
+                                )
                             ) from e
                 else:
                     if reraise_on_fallback:
                         raise
                     else:
                         raise Exception(
-                            f"Unhandled {exception_type.__name__}: {str(e)}"
+                            format(
+                                "Unhandled {exception_type}: {e}",
+                                exception_type.__name__,
+                                str(e),
+                            )
                         ) from e
 
         return wrapper
@@ -262,3 +273,43 @@ def handle_common_exceptions(
         ),
         **decorator_kwargs,
     )
+
+
+# Example usage of the decorator
+@handle_common_exceptions(
+    include_value_error=True,
+    include_type_error=True,
+    include_key_error=False,
+    log_level="error",
+    log_traceback=True
+)
+def example_function(data: Any) -> Dict[str, Any]:
+    """
+    Example function that might raise common exceptions.
+
+    Args:
+        data: Input data that might cause exceptions.
+
+    Returns:
+        Dict[str, Any]: Processed data or error response.
+    """
+    if not isinstance(data, dict):
+        raise TypeError("Input must be a dictionary")
+
+    if "key" not in data:
+        raise KeyError("Missing required key")
+
+    # Simulate processing
+    return {"success": True, "data": data}
+# Example usage
+if __name__ == "__main__":
+    try:
+        result = example_function("invalid data")
+        print(result)
+    except Exception as e:
+        print(f"Error occurred: {e}")
+        # The decorator will handle the exception and log it accordingly
+        # No need for additional error handling here
+        # The result will be a standardized error response
+        print(create_error_response(e, include_traceback=True))
+        
