@@ -5,14 +5,17 @@ from __future__ import annotations
 
 # Standard library imports
 import asyncio
-import base64
+
+# import base64
 import hashlib
 import json
 import logging
-import os
-import random
+
+# import os
+# import random
 import re
-import shutil
+
+# import shutil
 import time
 from concurrent.futures import ThreadPoolExecutor
 from dataclasses import dataclass
@@ -393,15 +396,11 @@ class WebContentAnalyzer:
 
             # Check if cache is still fresh (24 hours)
             if time.time() - cached_data.get("timestamp", 0) < 86400:
-                logger.info(
-                    format("Loading from cache: {cache_key}", cache_key=cache_key)
-                )
+                logger.info(f"Loading from cache: {cache_key}")
                 return cached_data
 
         except Exception as e:
-            logger.warning(
-                format("Error loading cache {cache_key}: {e}", cache_key=cache_key, e=e)
-            )
+            logger.warning(f"Error loading cache {cache_key}: {str(e)}")
 
         return None
 
@@ -411,11 +410,9 @@ class WebContentAnalyzer:
         try:
             async with aiofiles.open(cache_path, "w", encoding="utf-8") as f:
                 await f.write(json.dumps(data, ensure_ascii=False, indent=2))
-            logger.info(format("Saved to cache: {cache_key}", cache_key=cache_key))
+            logger.info(f"Saved to cache: {cache_key}")
         except Exception as e:
-            logger.error(
-                format("Error saving cache {cache_key}: {e}", cache_key=cache_key, e=e)
-            )
+            logger.error(f"Error saving cache {cache_key}: {str(e)}")
 
     async def analyze_url(self, url: str) -> AnalysisResult:
         """Analyze a single URL and return comprehensive results."""
@@ -429,7 +426,7 @@ class WebContentAnalyzer:
                 scraped_data = cached_data
             else:
                 # Scrape fresh content
-                logger.info(format("Scraping URL: {url}", url=url))
+                logger.info(f"Scraping URL: {url}")
                 scraped_data = await self._scrape_with_playwright(url)
                 await self._save_to_cache(cache_key, scraped_data)
 
@@ -481,22 +478,16 @@ class WebContentAnalyzer:
                 processing_time=processing_time,
             )
 
-            logger.info(
-                format(
-                    "Analysis completed for {url} in {processing_time:.2f}s",
-                    url=url,
-                    processing_time=processing_time,
-                )
-            )
+            logger.info(f"Analysis completed for {url} in {processing_time:.2f}s")
             return result
 
         except Exception as e:
-            logger.error(format("Error analyzing {url}: {e}", url=url, e=e))
+            logger.error(f"Error analyzing {url}: {str(e)}")
             raise
 
     async def analyze_urls(self, urls: List[str]) -> List[AnalysisResult]:
         """Analyze multiple URLs concurrently."""
-        logger.info(format("Starting analysis of {len} URLs", len=len(urls)))
+        logger.info(f"Starting analysis of {len(urls)} URLs")
 
         tasks = [self.analyze_url(url) for url in urls]
         results = []
@@ -506,9 +497,9 @@ class WebContentAnalyzer:
                 result = await task
                 results.append(result)
             except Exception as e:
-                logger.error(format("Failed to analyze URL: %s - %s", task, e))
+                logger.error(f"Failed to analyze URL: {str(e)}")
 
-        logger.info(format("Completed analysis of %s/%s URLs", len(results), len(urls)))
+        logger.info(f"Completed analysis of {len(results)}/{len(urls)} URLs")
         return results
 
     async def save_results(
@@ -532,7 +523,7 @@ class WebContentAnalyzer:
                 json.dumps(results_data, ensure_ascii=False, indent=2, default=str)
             )
 
-        logger.info(format("Results saved to %s", output_path))
+        logger.info(f"Results saved to {output_path}")
         return output_path
 
     def get_summary_stats(self, results: List[AnalysisResult]) -> Dict[str, Any]:
@@ -580,7 +571,7 @@ class WebContentAnalyzer:
 async def main():
     """Example usage of the WebContentAnalyzer."""
     # Sample URLs for testing
-    test_urls = [
+    test_urls: List[str] = [
         "https://example.com",
         "https://httpbin.org/html",
         "https://jsonplaceholder.typicode.com/posts/1",
@@ -626,7 +617,7 @@ async def main():
     except KeyboardInterrupt:
         print("\nAnalysis interrupted by user")
     except Exception as e:
-        logger.error(format("Analysis failed: {e}", e=e))
+        logger.error(f"Analysis failed: {str(e)}")
         raise
 
 
